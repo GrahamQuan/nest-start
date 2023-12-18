@@ -8,16 +8,19 @@ export class UserService {
     {
       id: 's6h2j7',
       name: 'Alice Smith',
+      email: 'alicesmith@gmail.com',
       age: 18,
     },
     {
       id: 'r9g4k1',
       name: 'Bob Johnson',
+      email: 'bobjohnson@gmail.com',
       age: 27,
     },
     {
       id: 't8f3b6',
       name: 'Emma Davis',
+      email: 'emmadavis@gmail.com',
       age: 42,
     },
   ];

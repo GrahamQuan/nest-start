@@ -1,4 +1,4 @@
-import { IsInt, MinLength } from 'class-validator';
+import { IsEmail, IsInt, MinLength } from 'class-validator';
 export class CreateUserDto {
   id: string;
 
@@ -7,4 +7,7 @@ export class CreateUserDto {
 
   @IsInt()
   age: number;
+
+  @IsEmail()
+  email: string;
 }
