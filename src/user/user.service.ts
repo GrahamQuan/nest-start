@@ -27,11 +27,11 @@ export class UserService {
     return createUserDto;
   }
 
-  findAll(age: string | undefined): CreateUserDto[] {
+  findAll(age: number | undefined): CreateUserDto[] {
     if (!age) {
       return UserList;
     }
-    return UserList.filter((user) => user.age >= +age);
+    return UserList.filter((user) => user.age >= age);
   }
 
   findOne(id: string): CreateUserDto {

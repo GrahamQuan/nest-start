@@ -6,6 +6,7 @@ import {
   Get,
   NotFoundException,
   Param,
+  ParseIntPipe,
   Post,
   Put,
   Query,
@@ -25,7 +26,7 @@ export class UserController {
 
   // get query /user?age=xxx
   @Get()
-  findAll(@Query('age') age: string | undefined) {
+  findAll(@Query('age', ParseIntPipe) age: number | undefined) {
     return this.userService.findAll(age);
   }
 
