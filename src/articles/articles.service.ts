@@ -16,7 +16,10 @@ export class ArticlesService {
   }
 
   findOne(id: string) {
-    return this.prisma.article.findUnique({ where: { id } });
+    return this.prisma.article.findUnique({
+      where: { id },
+      include: { author: true },
+    });
   }
 
   findDrafts() {
