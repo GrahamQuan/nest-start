@@ -47,7 +47,7 @@ export class ArticlesController {
   }
 
   @Patch(':id')
-  @ApiOkResponse({ type: ArticleEntity })
+  @ApiCreatedResponse({ type: ArticleEntity })
   update(@Param('id') id: string, @Body() updateArticleDto: UpdateArticleDto) {
     return this.articlesService.update(id, updateArticleDto);
   }
