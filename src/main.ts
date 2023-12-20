@@ -4,6 +4,8 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { ClassSerializerInterceptor, ValidationPipe } from '@nestjs/common';
 import { PrismaClientExceptionFilter } from 'src/prisma-client-exception/prisma-client-exception.filter';
 
+const port = process.env.PORT ? parseInt(process.env.PORT) : 3000;
+
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
@@ -14,6 +16,7 @@ async function bootstrap() {
     .setTitle('Nestjs-Start')
     .setDescription('The Median Clone API description')
     .setVersion('0.1')
+    .addBearerAuth()
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
@@ -23,6 +26,6 @@ async function bootstrap() {
   const { httpAdapter } = app.get(HttpAdapterHost);
   app.useGlobalFilters(new PrismaClientExceptionFilter(httpAdapter));
 
-  await app.listen(3000);
+  await app.listen(port);
 }
 bootstrap();
