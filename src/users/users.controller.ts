@@ -8,11 +8,14 @@ import {
   Delete,
   ParseIntPipe,
   UseGuards,
+  Query,
+  ParseBoolPipe,
 } from '@nestjs/common';
 import {
   ApiBearerAuth,
   ApiCreatedResponse,
   ApiOkResponse,
+  ApiQuery,
   ApiTags,
 } from '@nestjs/swagger';
 import { UsersService } from './users.service';
@@ -36,8 +39,17 @@ export class UsersController {
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiOkResponse({ type: UserEntity, isArray: true })
-  async findAll() {
-    const users = await this.usersService.findAll();
+  @ApiQuery({
+    name: 'showArticles',
+    required: false,
+    description: 'Filter users by active status',
+    type: Boolean,
+  })
+  async findAll(
+    @Query('showArticles', new ParseBoolPipe({ optional: true }))
+    showArticles: boolean = false,
+  ) {
+    const users = await this.usersService.findAll(showArticles);
     return users.map((user) => new UserEntity(user));
   }
 

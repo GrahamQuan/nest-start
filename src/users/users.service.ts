@@ -21,8 +21,10 @@ export class UsersService {
     return this.prisma.user.create({ data: createUserDto });
   }
 
-  findAll() {
-    return this.prisma.user.findMany();
+  findAll(showArticles: boolean) {
+    return this.prisma.user.findMany({
+      include: { articles: showArticles },
+    });
   }
 
   findOne(id: number) {
