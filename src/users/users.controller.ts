@@ -10,6 +10,7 @@ import {
   UseGuards,
   Query,
   ParseBoolPipe,
+  UseInterceptors,
 } from '@nestjs/common';
 import {
   ApiBearerAuth,
@@ -23,9 +24,11 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserEntity } from './entities/user.entity';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { CacheInterceptor } from '@nestjs/cache-manager';
 
 @Controller('users')
 @ApiTags('users')
+@UseInterceptors(CacheInterceptor) // only apply to GET methods
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
